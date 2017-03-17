@@ -1,0 +1,6 @@
+node_modules/
+.eslintrc
+.env
+bower_components
+.idea
+*.iml
