@@ -3,9 +3,28 @@
   <% include partials/head.ejs %>
   <body>
     <% include partials/nav.ejs %>
-    <h1 class="title"><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <% include partials/footer.ejs %>
+
+    <% if (message.length > 0) { %>
+    <div class="alert alert-danger"><p><%= message %></p></div>
+    <% } %>
+
+    <div class="container">
+      <form id="addStock" action="/add" method="post">
+        <div class="form-inline">
+          <input type="text" class="form-control" name="stockTicker" placeholder="Enter a stock ticker">
+          <button type="submit" class="btn btn-primary"><span>Add Stock</span></button>
+        </div>
+      </form>
+    </div>
+
+    <% if (activeStocks) { %>
+      <% for (var i=0; i< activeStocks.length; i++) { %>
+        <div> <%- activeStocks[i] %></div>
+      <% } %>
+    <% } %>
+
+
+          <% include partials/footer.ejs %>
   </body>
 
   <!-- jQuery and jQuery UI -->

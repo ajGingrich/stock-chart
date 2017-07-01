@@ -1,15 +1,22 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+var StockHandler = require('../app/controllers/stockHandler.server');
+var stockHandler = new StockHandler();
 
 //home page
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+router.get('/', stockHandler.getStocks, function(req, res) {
+    res.render('index', { activeStocks: res.locals.activeStocks });
 });
 
 //profile
 router.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile', { user: req.user });
+});
+
+//get active stocks before and after login incase user isn't logged in
+router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
+    res.render('index', { activeStocks: res.locals.activeStocks });
 });
 
 //logout
@@ -48,5 +55,7 @@ module.exports = router;
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-    res.redirect('/');
+
+    //res.render('index', { message: req.flash('You better sign up biatch') });
+    res.render('index', { message: 'You need to be logged in' });
 }

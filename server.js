@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 //var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
@@ -30,6 +31,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret:'MySecret'}));
+app.use(flash());
+
+app.use(function(req, res, next){
+    res.locals.message = req.flash();
+    next();
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
