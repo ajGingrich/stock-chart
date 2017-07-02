@@ -1,4 +1,3 @@
-var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 //var logger = require('morgan');
@@ -8,11 +7,16 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
 var bodyParser = require('body-parser');
+var express = require('express');
+var app = express();
+
+//socket io
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var app = express();
 require('dotenv').load();
 require('./app/config/passport')(passport);
 
@@ -67,7 +71,18 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// socket.io
+io.on('connection', function (socket) {
+    console.log('Client Connected..');
+
+    //socket.emit('news', { hello: 'world' });
+    socket.on('join', function (data) {
+        console.log(data);
+        socket.emit('messages', 'Hello from server');
+    });
+});
+
 var port = process.env.PORT || 8080;
-app.listen(port,  function () {
+server.listen(port,  function () {
     console.log('Node.js listening on port ' + port + '...');
 });
