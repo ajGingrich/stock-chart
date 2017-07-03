@@ -71,14 +71,17 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// socket.io
+// connect to socket.io
 io.on('connection', function (socket) {
     console.log('Client Connected..');
 
-    //socket.emit('news', { hello: 'world' });
-    socket.on('join', function (data) {
+    ///retrieve new stock from client
+    socket.on('submitStock', function (data) {
         console.log(data);
-        socket.emit('messages', 'Hello from server');
+     ///do mongodb stuff here
+
+     ///send new stocks to all clients
+     socket.emit('activeStocks', data);
     });
 });
 

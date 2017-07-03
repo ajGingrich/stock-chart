@@ -9,15 +9,5 @@
   <link href='/css/stylesheet.css' rel="stylesheet" type="text/css">
 
   <script src='/socket.io/socket.io.js'></script>
-  <script>
-      var socket = io.connect();
-      //var socket = io.connect(process.env.APP_URL);
-      socket.on('connect', function (data) {
-          socket.emit('join', 'Hello World from client');
-      });
-      socket.on('messages', function(data) {
-          alert(data);
-      });
-  </script>
 
 </head>

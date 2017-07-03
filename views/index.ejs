@@ -17,17 +17,12 @@
       </form>
     </div>
 
+    <!--<div id="stockContainer"></div>-->
     <% if (activeStocks) { %>
       <% for (var i=0; i< activeStocks.length; i++) { %>
         <div> <%- activeStocks[i] %></div>
       <% } %>
     <% } %>
-
-    <form class="form" id="chat_form">
-      <input id="chat_input" type="text">
-      <input type="submit" value="Send">
-    </form>
-
 
      <% include partials/footer.ejs %>
   </body>
