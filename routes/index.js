@@ -16,7 +16,7 @@ io.on('connection', function (socket) {
         //io.sockets.emit('activeStocks', data);
     });
 
-    socket.on('updateMyStocks', function () {
+    socket.on('updateMyStocks', function (data) {
         //update those stocks
         /*router.post('/update', stockHandler.getStocks, function (req, res) {
             res.render('index', { activeStocks: res.locals.activeStocks });
@@ -24,6 +24,8 @@ io.on('connection', function (socket) {
         router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
             res.render('index', { activeStocks: res.locals.activeStocks });
         });
+        ///only send to each updated client
+        socket.emit('updated', data);
     });
 });
 

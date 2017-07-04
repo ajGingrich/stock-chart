@@ -38,6 +38,10 @@ $('#addStock').on('submit', function(e){
 //retrieve the new stock from the server and update list
 socket.on('activeStocks', function() {
     //how to update activeStocks here??
-    socket.emit('updateMyStocks');
-    console.log('updated');
+    socket.emit('updateMyStocks', 'you now have all the stocks');
+});
+
+//check if its updated
+socket.on('updated', function (data) {
+    alert(data);
 });
