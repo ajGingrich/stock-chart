@@ -36,7 +36,6 @@ function stockHandler () {
         } );
     };
 
-
     /*this.historicalData = function(req, res) {
 
         var stockTicker = req.body.stockTicker;

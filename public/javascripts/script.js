@@ -1,30 +1,11 @@
-/*Check for Jquery*/
-/*$(document).ready(function() {
-    $('.title').click(function() {
-        $(this).effect('bounce', {times: 3}, 500);
-    });
-});*/
 
+//var stockContainer = $('#stockContainer');
+var someStocks = $('#someStocks');
 
-//var getTest = <% activeStocks %>
-
-/*var stockList = ['1', 'oh boy', 'moar'];
-var stockContainer = $('#stockContainer');
-
-var writeStocks = function () {
-    for (var i=0; i<stockList.length; i++) {
-        stockContainer.append('<div>' + stockList[i] + '</div>');
-    }
-};
-
-writeStocks();*/
-
-var activeStocks;
 var socket = io.connect();
 
 ///connect to socket
 socket.on('connect', function () {
-    socket.emit('join', 'Hello World from client');
     console.log('connected');
 });
 
@@ -44,5 +25,12 @@ socket.on('activeStocks', function() {
 
 //check if its updated
 socket.on('updated', function (data) {
+    $("#someStocks").load(location.href + " someStcks");
     alert(data);
 });
+
+/*var writeStocks = function () {
+    for (var i=0; i<activeStocks.length; i++) {
+        stockContainer.append('<div>' + activeStocks[i] + '</div>');
+    }
+};*/

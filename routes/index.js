@@ -17,8 +17,7 @@ io.on('connection', function (socket) {
     socket.on('updateMyStocks', function (data) {
         //update those stocks
         ///only send to each updated client
-        socket.get('/');
-        //socket.emit('updated', data);
+        socket.emit('updated', data);
     });
 });
 
