@@ -1,6 +1,6 @@
 
 //var stockContainer = $('#stockContainer');
-var someStocks = $('#someStocks');
+//var someStocks = $('#someStocks');
 
 var socket = io.connect();
 
@@ -25,7 +25,7 @@ socket.on('activeStocks', function() {
 
 //check if its updated
 socket.on('updated', function (data) {
-    $("#someStocks").load(location.href + " someStocks");
+    $("#someStocks").load(location.href+" #someStocks>*","");
     alert(data);
 });
 
