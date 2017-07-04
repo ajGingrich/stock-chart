@@ -16,8 +16,8 @@ io.on('connection', function (socket) {
             res.render('index', { activeStocks: data });
         });
 
-        ///send new stocks to all clients
-        socket.emit('activeStocks', data);
+        ///send new stocks to all clients except socket that started it.
+        socket.broadcast.emit('activeStocks', data);
     });
 });
 
