@@ -25,16 +25,19 @@ var socket = io.connect();
 ///connect to socket
 socket.on('connect', function () {
     socket.emit('join', 'Hello World from client');
+    console.log('connected');
 });
 
 ///use submit button to send the new stock to server
 $('#addStock').on('submit', function(e){
     //var stockList = $('#stockList');
     socket.emit('submitStock', ['pls work', 'andrew']);
+    console.log('submitted');
 });
 
 //retrieve the new stock from the server and update list
 socket.on('activeStocks', function() {
     //how to update activeStocks here??
     socket.emit('updateMyStocks');
+    console.log('updated');
 });

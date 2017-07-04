@@ -4,7 +4,7 @@ var Stocks = require('../models/stocks.js');
 
 function stockHandler () {
 
-    var request = require("request");
+    //var request = require("request");
 
     this.addStock = function(req, res, next) {
 
