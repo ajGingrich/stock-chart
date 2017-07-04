@@ -25,7 +25,7 @@ socket.on('activeStocks', function() {
 
 //check if its updated
 socket.on('updated', function (data) {
-    $("#someStocks").load(location.href + " someStcks");
+    $("#someStocks").load(location.href + " someStocks");
     alert(data);
 });
 
