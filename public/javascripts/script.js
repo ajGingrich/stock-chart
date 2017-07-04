@@ -19,6 +19,7 @@ var writeStocks = function () {
 
 writeStocks();*/
 
+var activeStocks;
 var socket = io.connect();
 
 ///connect to socket
@@ -29,11 +30,12 @@ socket.on('connect', function (data) {
 ///use submit button to send the new stock to server
 $('#addStock').on('submit', function(e){
     //var stockList = $('#stockList');
-    socket.emit('submitStock', 'here is the data');
+    socket.emit('submitStock', ['pls work', 'andrew']);
 });
 
 //retrieve the new stock from the server and update list
 socket.on('activeStocks', function(data) {
     //how to update activeStocks here??
-    console.log(data);
+    activeStocks = data;
+    console.log(activeStocks);
 });

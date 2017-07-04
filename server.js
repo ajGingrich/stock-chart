@@ -13,6 +13,7 @@ var app = express();
 //socket io
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+module.exports = io;
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -72,7 +73,7 @@ app.use(function(err, req, res, next) {
 });
 
 // connect to socket.io
-io.on('connection', function (socket) {
+/*io.on('connection', function (socket) {
     console.log('Client Connected..');
 
     ///retrieve new stock from client
@@ -83,7 +84,7 @@ io.on('connection', function (socket) {
      ///send new stocks to all clients
      socket.emit('activeStocks', data);
     });
-});
+});*/
 
 var port = process.env.PORT || 8080;
 server.listen(port,  function () {

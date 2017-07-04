@@ -3,6 +3,23 @@ var passport = require('passport');
 var router = express.Router();
 var StockHandler = require('../app/controllers/stockHandler.server');
 var stockHandler = new StockHandler();
+var io = require('../server');
+
+io.on('connection', function (socket) {
+    console.log('Client Connected..');
+
+    ///retrieve new stock from client
+    socket.on('submitStock', function (data) {
+        ///do mongodb stuff here
+        //get active stocks before and after login incase user isn't logged in
+        router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
+            res.render('index', { activeStocks: data });
+        });
+
+        ///send new stocks to all clients
+        socket.emit('activeStocks', data);
+    });
+});
 
 //home page
 router.get('/', stockHandler.getStocks, function(req, res) {
@@ -15,9 +32,9 @@ router.get('/profile', isLoggedIn, function(req, res) {
 });
 
 //get active stocks before and after login incase user isn't logged in
-router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
+/*router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
     res.render('index', { activeStocks: res.locals.activeStocks });
-});
+});*/
 
 //logout
 router.get('/logout', function(req, res) {
