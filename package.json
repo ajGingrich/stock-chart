@@ -27,7 +27,6 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "path": "^0.12.7",
-    "sails": "^0.12.13",
     "serve-favicon": "^2.3.2",
     "socket.io": "^2.0.3"
   }

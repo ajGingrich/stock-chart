@@ -14,11 +14,11 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('activeStocks', data);
     });
 
-    socket.on('updateMyStocks', function (data) {
+    /*socket.on('updateMyStocks', function (data) {
         //update those stocks
         ///only send to each updated client
         socket.emit('updated', data);
-    });
+    });*/
 });
 
 //home page

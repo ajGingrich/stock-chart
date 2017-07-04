@@ -1,7 +1,3 @@
-
-//var stockContainer = $('#stockContainer');
-//var someStocks = $('#someStocks');
-
 var socket = io.connect();
 
 ///connect to socket
@@ -18,19 +14,13 @@ $('#addStock').on('submit', function(e){
 
 //retrieve the new stock from the server and update list
 socket.on('activeStocks', function() {
-    //how to update activeStocks here??
-    socket.emit('updateMyStocks', 'you now have all the stocks');
+    //socket.emit('updateMyStocks', 'you now have all the stocks');
+    $("#stockContainer").load(location.href+" #stockContainer>*","");
     //location.reload();
 });
 
 //check if its updated
-socket.on('updated', function (data) {
-    $("#someStocks").load(location.href+" #someStocks>*","");
-    alert(data);
-});
-
-/*var writeStocks = function () {
-    for (var i=0; i<activeStocks.length; i++) {
-        stockContainer.append('<div>' + activeStocks[i] + '</div>');
-    }
-};*/
+/*socket.on('updated', function () {
+    ///partially reload stock div
+    $("#stockContainer").load(location.href+" #stockContainer>*","");
+});*/
