@@ -9,16 +9,15 @@ io.on('connection', function (socket) {
     console.log('Client Connected..');
 
     ///retrieve new stock from client
-    socket.on('submitStock', function (data) {
+    socket.on('submitStockToServer', function () {
         ///send new stocks to all clients except socket that started it.
-        socket.broadcast.emit('activeStocks', data);
+        socket.broadcast.emit('newStockToClient', data);
     });
 
-    /*socket.on('updateMyStocks', function (data) {
-        //update those stocks
+    socket.on('updateMyStocks', function () {
         ///only send to each updated client
-        socket.emit('updated', data);
-    });*/
+        socket.emit('updated');
+    });
 });
 
 //home page

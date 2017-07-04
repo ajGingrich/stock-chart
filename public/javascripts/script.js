@@ -8,19 +8,17 @@ socket.on('connect', function () {
 ///use submit button to send the new stock to server
 $('#addStock').on('submit', function(e){
     //var stockList = $('#stockList');
-    socket.emit('submitStock', ['pls work', 'andrew']);
+    socket.emit('submitStockToServer');
     console.log('submitted');
 });
 
-//retrieve the new stock from the server and update list
-socket.on('activeStocks', function() {
-    //socket.emit('updateMyStocks', 'you now have all the stocks');
-    $("#stockContainer").load(location.href+" #stockContainer>*","");
-    //location.reload();
+//retrieve information on new stock and send back request to server
+socket.on('newStockToClient', function() {
+    socket.emit('updateMyStocks');
 });
 
 //check if its updated
-/*socket.on('updated', function () {
+socket.on('updated', function () {
     ///partially reload stock div
     $("#stockContainer").load(location.href+" #stockContainer>*","");
-});*/
+});
