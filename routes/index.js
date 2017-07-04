@@ -18,7 +18,10 @@ io.on('connection', function (socket) {
 
     socket.on('updateMyStocks', function () {
         //update those stocks
-        router.post('/update', stockHandler.getStocks, function (req, res) {
+        /*router.post('/update', stockHandler.getStocks, function (req, res) {
+            res.render('index', { activeStocks: res.locals.activeStocks });
+        });*/
+        router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
             res.render('index', { activeStocks: res.locals.activeStocks });
         });
     });
