@@ -12,12 +12,13 @@ io.on('connection', function (socket) {
     socket.on('submitStock', function (data) {
         ///do mongodb stuff here
         //get active stocks before and after login incase user isn't logged in
-        router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
+        /*router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
             res.render('index', { activeStocks: data });
-        });
+        });*/
 
         ///send new stocks to all clients except socket that started it.
         socket.broadcast.emit('activeStocks', data);
+        //io.sockets.emit('activeStocks', data);
     });
 });
 
@@ -32,9 +33,9 @@ router.get('/profile', isLoggedIn, function(req, res) {
 });
 
 //get active stocks before and after login incase user isn't logged in
-/*router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
+router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
     res.render('index', { activeStocks: res.locals.activeStocks });
-});*/
+});
 
 //logout
 router.get('/logout', function(req, res) {

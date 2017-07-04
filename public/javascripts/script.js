@@ -36,7 +36,10 @@ $('#addStock').on('submit', function(e){
 //retrieve the new stock from the server and update list
 socket.on('activeStocks', function(data) {
     //how to update activeStocks here??
-    activeStocks = data;
-    alert('hello world from Server');
-    console.log(activeStocks);
+    //route
+    $.ajax({
+        type: 'POST',
+        url: 'https://stockchart320.herokuapp.com/add'
+    });
+    console.log('test');
 });
