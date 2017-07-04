@@ -10,15 +10,17 @@ io.on('connection', function (socket) {
 
     ///retrieve new stock from client
     socket.on('submitStock', function (data) {
-        ///do mongodb stuff here
-        //get active stocks before and after login incase user isn't logged in
-        /*router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
-            res.render('index', { activeStocks: data });
-        });*/
 
         ///send new stocks to all clients except socket that started it.
         socket.broadcast.emit('activeStocks', data);
         //io.sockets.emit('activeStocks', data);
+    });
+
+    socket.on('updateMyStocks', function () {
+        //update those stocks
+        router.post('/update', stockHandler.getStocks, function (req, res) {
+            res.render('index', { activeStocks: res.locals.activeStocks });
+        });
     });
 });
 

@@ -23,7 +23,7 @@ var activeStocks;
 var socket = io.connect();
 
 ///connect to socket
-socket.on('connect', function (data) {
+socket.on('connect', function () {
     socket.emit('join', 'Hello World from client');
 });
 
@@ -34,12 +34,7 @@ $('#addStock').on('submit', function(e){
 });
 
 //retrieve the new stock from the server and update list
-socket.on('activeStocks', function(data) {
+socket.on('activeStocks', function() {
     //how to update activeStocks here??
-    //route
-    $.ajax({
-        type: 'POST',
-        url: 'https://stockchart320.herokuapp.com/add'
-    });
-    console.log('test');
+    socket.emit('updateMyStocks');
 });
