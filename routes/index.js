@@ -9,14 +9,14 @@ io.on('connection', function (socket) {
     console.log('Client Connected..');
 
     ///retrieve new stock from client
-    socket.on('submitStockToServer', function () {
+    socket.on('submitStockToServer', function (data) {
         ///send new stocks to all clients except socket that started it.
         socket.broadcast.emit('newStockToClient', data);
     });
 
-    socket.on('updateMyStocks', function () {
+    socket.on('updateMyStocks', function (data) {
         ///only send to each updated client
-        socket.emit('updated');
+        socket.emit('updated', data);
     });
 });
 

@@ -14,7 +14,7 @@ $('#addStock').on('submit', function(e){
 
 //retrieve information on new stock and send back request to server
 socket.on('newStockToClient', function() {
-    socket.emit('updateMyStocks');
+    socket.emit('updateMyStocks', 'Your stocks are now updated');
 });
 
 //check if its updated
