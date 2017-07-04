@@ -18,7 +18,7 @@ io.on('connection', function (socket) {
 
     socket.on('updateMyStocks', function (data) {
         //update those stocks
-        res.redirect('/');
+        redirect();
         ///only send to each updated client
         socket.emit('updated', data);
     });
@@ -36,6 +36,11 @@ router.get('/profile', isLoggedIn, function(req, res) {
 
 //get active stocks before and after login incase user isn't logged in
 router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
+    res.render('index', { activeStocks: res.locals.activeStocks });
+});
+
+//update
+router.get('/update', stockHandler.getStocks, function (req, res) {
     res.render('index', { activeStocks: res.locals.activeStocks });
 });
 
@@ -78,4 +83,9 @@ function isLoggedIn(req, res, next) {
 
     //res.render('index', { message: req.flash('You better sign up biatch') });
     res.render('index', { message: 'You need to be logged in' });
+}
+
+function redirect (req, res) {
+    console.log(req);
+    res.redirect('/');
 }
