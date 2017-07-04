@@ -10,17 +10,15 @@ io.on('connection', function (socket) {
 
     ///retrieve new stock from client
     socket.on('submitStock', function (data) {
-
         ///send new stocks to all clients except socket that started it.
         socket.broadcast.emit('activeStocks', data);
-        //io.sockets.emit('activeStocks', data);
     });
 
     socket.on('updateMyStocks', function (data) {
         //update those stocks
-        redirect();
         ///only send to each updated client
-        socket.emit('updated', data);
+        socket.get('/');
+        //socket.emit('updated', data);
     });
 });
 
@@ -83,9 +81,4 @@ function isLoggedIn(req, res, next) {
 
     //res.render('index', { message: req.flash('You better sign up biatch') });
     res.render('index', { message: 'You need to be logged in' });
-}
-
-function redirect (req, res) {
-    console.log(req);
-    res.redirect('/');
 }
