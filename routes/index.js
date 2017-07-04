@@ -18,9 +18,7 @@ io.on('connection', function (socket) {
 
     socket.on('updateMyStocks', function (data) {
         //update those stocks
-        router.get('/update', stockHandler.getStocks, function (req, res) {
-            res.render('index', { activeStocks: res.locals.activeStocks });
-        });
+        res.redirect('/');
         ///only send to each updated client
         socket.emit('updated', data);
     });

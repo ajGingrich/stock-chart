@@ -39,6 +39,7 @@ $('#addStock').on('submit', function(e){
 socket.on('activeStocks', function() {
     //how to update activeStocks here??
     socket.emit('updateMyStocks', 'you now have all the stocks');
+    location.reload();
 });
 
 //check if its updated
