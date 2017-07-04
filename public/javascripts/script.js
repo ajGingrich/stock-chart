@@ -37,5 +37,6 @@ $('#addStock').on('submit', function(e){
 socket.on('activeStocks', function(data) {
     //how to update activeStocks here??
     activeStocks = data;
+    alert('hello world from Server');
     console.log(activeStocks);
 });
