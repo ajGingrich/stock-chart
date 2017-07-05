@@ -9,7 +9,7 @@ io.on('connection', function (socket) {
     console.log('Client Connected..');
 
     ///retrieve new stock from client
-    socket.on('submitStockToServer', function (data) {
+    socket.on('changeToStock', function (data) {
         ///send new stocks to all clients except socket that started it.
         socket.broadcast.emit('newStockToClient', data);
     });
@@ -30,13 +30,13 @@ router.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile', { user: req.user });
 });
 
-//get active stocks before and after login incase user isn't logged in
+//add a stock but get active stocks before and after login in case user isn't logged in
 router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
     res.render('index', { activeStocks: res.locals.activeStocks });
 });
 
-//update
-router.get('/update', stockHandler.getStocks, function (req, res) {
+//remove a stock but get active stocks before and after login in case user isn't logged in
+router.post('/remove/:stockId', stockHandler.getStocks, isLoggedIn, stockHandler.removeStock, stockHandler.getStocks, function (req, res) {
     res.render('index', { activeStocks: res.locals.activeStocks });
 });
 

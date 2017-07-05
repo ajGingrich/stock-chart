@@ -17,12 +17,18 @@
       </form>
     </div>
 
-    <!--<div id="stockContainer"></div>-->
     <div id="stockContainer">
         <% if (activeStocks) { %>
-        <% for (var i=0; i< activeStocks.length; i++) { %>
-      <div> <%- activeStocks[i] %></div>
-        <% } %>
+          <% for (var i=0; i< activeStocks.length; i++) { %>
+            <div class="stockBox">
+                <%- activeStocks[i].ticker %>
+                <div>
+                  <form class="removeStock" action="/remove/<%- activeStocks[i].id %>" method="post">
+                    <button type="submit" class="btn btn-primary"><span>X</span></button>
+                  </form>
+                </div>
+            </div>
+          <% } %>
         <% } %>
     </div>
 

@@ -30,28 +30,31 @@ function stockHandler () {
             if (err) throw err;
             res.locals.activeStocks = [];
             for (var i=0; i<docs.length; i++) {
-                res.locals.activeStocks.push(docs[i].ticker);
+                res.locals.activeStocks.push({id: docs[i]._id, ticker: docs[i].ticker, user: docs[i].user});
+                //console.log(res.locals.activeStocks);
             }
             return next();
         } );
     };
 
-    /*this.historicalData = function(req, res) {
+    this.removeStock = function(req, res, next) {
+        var stockId = req.params.stockId;
+        var userId = req.user.id;
 
-        var stockTicker = req.body.stockTicker;
+        //check to make sure user is deleting their own stock
 
-        ///filter using google finance?
-
-        ///res.render('index', {user: req.user});
-        Stocks.create({
-                user: req.user._id,
-                ticker: stockTicker
-            },
-            function(err, doc) {
-                if (err) throw err;
-                res.render('index', {user: req.user});
-            } );
-    };*/
+        //find and remove requested stock
+        Stocks.findOneAndRemove({_id: stockId, user: userId}, function(err, docs) {
+            if (err) throw err;
+            console.log(docs);
+            if (docs != null) {
+                return next();
+            }
+            else {
+                res.render('index', { message: 'You cant delete other peoples stocks' });
+            }
+        });
+    };
 }
 
 module.exports = stockHandler;
