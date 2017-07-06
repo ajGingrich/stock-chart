@@ -29,3 +29,5 @@ socket.on('updated', function () {
     ///partially reload stock div
     $("#stockContainer").load(location.href+" #stockContainer>*","");
 });
+
+

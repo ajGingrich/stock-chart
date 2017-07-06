@@ -1,10 +1,9 @@
 'use strict';
 
 var Stocks = require('../models/stocks.js');
+var googleFinance = require('google-finance');
 
 function stockHandler () {
-
-    //var request = require("request");
 
     this.addStock = function(req, res, next) {
 
@@ -28,13 +27,40 @@ function stockHandler () {
         //find all of the stock tickers and push to array
         Stocks.find({}, function(err, docs) {
             if (err) throw err;
+
             res.locals.activeStocks = [];
+            var symbols = [];
+            var ids= [];
+            var users = [];
             for (var i=0; i<docs.length; i++) {
-                res.locals.activeStocks.push({id: docs[i]._id, ticker: docs[i].ticker, user: docs[i].user});
-                //console.log(res.locals.activeStocks);
+                symbols.push(docs[i].ticker);
+                ids.push(docs[i]._id);
+                users.push(docs[i].user);
             }
+
+            //not efficient at all
+            ///get financial data here
+            googleFinance.historical({symbols: symbols, from: '2016-12-02', to: '2017-01-04'}, function(err, data) {
+
+                for (var i=0; i<symbols.length; i++) {
+                    var series = [];
+
+                    for (var j=0; j< data[symbols[i]].length; j++) {
+                        //convert date to milliseconds
+                        var objDate = data[symbols[i]][j].date;
+                        var milliseconds = objDate.getTime();
+
+                        series.push({
+                            0: milliseconds,
+                            1: data[symbols[i]][j].close
+                        });
+                    }
+                res.locals.activeStocks.push({id: ids[i], ticker: symbols[i], user: users[i], series: series});
+                }
             return next();
-        } );
+            });
+
+        });
     };
 
     this.removeStock = function(req, res, next) {

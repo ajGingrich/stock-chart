@@ -72,20 +72,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// connect to socket.io
-/*io.on('connection', function (socket) {
-    console.log('Client Connected..');
-
-    ///retrieve new stock from client
-    socket.on('submitStock', function (data) {
-        console.log(data);
-     ///do mongodb stuff here
-
-     ///send new stocks to all clients
-     socket.emit('activeStocks', data);
-    });
-});*/
-
 var port = process.env.PORT || 8080;
 server.listen(port,  function () {
     console.log('Node.js listening on port ' + port + '...');

@@ -8,16 +8,84 @@
     <div class="alert alert-danger"><p><%= message %></p></div>
     <% } %>
 
-    <div class="container">
-      <form id="addStock" action="/add" method="post">
-        <div class="form-inline">
-          <input type="text" class="form-control" name="stockTicker" placeholder="Enter a stock ticker">
-          <button type="submit" class="btn btn-primary"><span>Add Stock</span></button>
-        </div>
-      </form>
-    </div>
-
     <div id="stockContainer">
+
+      <div id="chart">
+          <script type="text/javascript">
+              ///decode to avoid XSS attacks
+              function htmlDecode(input){
+                  var e = document.createElement('div');
+                  e.innerHTML = input;
+                  return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+              }
+
+              var activeStocks = JSON.parse(htmlDecode("<%= JSON.stringify(activeStocks) %>"));
+              //convert to format for highcharts
+              console.log(activeStocks);
+
+              var chart = document.getElementById('chart');
+              var seriesOptions = [],
+                  seriesCounter = 0,
+                  names = ['MSFT', 'AAPL', 'GOOG'];
+
+              function createChart() {
+
+                  Highcharts.stockChart(chart, {
+                      rangeSelector: {
+                          selected: 4
+                      },
+                      yAxis: {
+                          labels: {
+                              formatter: function () {
+                                  return (this.value > 0 ? ' + ' : '') + this.value + '%';
+                              }
+                          },
+                          plotLines: [{
+                              value: 0,
+                              width: 2,
+                              color: 'silver'
+                          }]
+                      },
+                      plotOptions: {
+                          series: {
+                              compare: 'percent',
+                              showInNavigator: true
+                          }
+                      },
+                      tooltip: {
+                          pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+                          valueDecimals: 2,
+                          split: true
+                      },
+                      series: seriesOptions
+                  });
+              }
+
+              $.each(names, function (i, name) {
+
+                  $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?', function (data) {
+
+                      seriesOptions[i] = {
+                          name: name,
+                          data: data
+                      };
+
+                      //console.log(seriesOptions);
+
+                      // As we're loading the data asynchronously, we don't know what order it will arrive. So
+                      // we keep a counter and create the chart when all the data is loaded.
+                      seriesCounter += 1;
+
+                      if (seriesCounter === names.length) {
+                          createChart();
+                      }
+                  });
+              });
+
+
+          </script>
+
+      </div>
         <% if (activeStocks) { %>
           <% for (var i=0; i< activeStocks.length; i++) { %>
             <div class="stockBox">
@@ -30,15 +98,13 @@
             </div>
           <% } %>
         <% } %>
+      </div>
+
     </div>
 
 
      <% include partials/footer.ejs %>
   </body>
-
-  <!-- jQuery and jQuery UI -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
   <!-- Bootstrap Javascript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

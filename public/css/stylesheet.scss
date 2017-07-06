@@ -1,4 +1,4 @@
-$backgroundColor: #e3e8ef;
+$backgroundColor: #721071;
 $partialColor: #a7b5ba;
 /********* Fonts **********/
 
@@ -43,6 +43,12 @@ div h4 {
 
 .nav-container {
   background-color: $partialColor;
+}
+
+#addStock {
+  margin: 10px 0 0 10px;
+  float: left;
+  display: inline;
 }
 
 nav p {
@@ -130,9 +136,25 @@ footer p:nth-child(3) {
 /****** StockBox Styling ******/
 
 .stockBox {
-  height: 100px;
-  width: 100px;
-  background-color: #eeeeee;
+  height: 75px;
+  width: 75px;
+  background-color: orange;
   border-radius: 10px;
   opacity: .8;
+  display: inline-block;
+  margin: 20px 20px 0 0 ;
+}
+#chart {
+  height: 400px;
+  width: 800px;
+  background-color: white;
+  border-radius: 5px;
+  opacity: .8;
+  display: inline-block;
+  float: left;
+  margin: 20px 0 0 20px;
+}
+
+.alert {
+  margin: 0;
 }
