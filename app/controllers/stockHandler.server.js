@@ -38,9 +38,8 @@ function stockHandler () {
                 users.push(docs[i].user);
             }
 
-            //not efficient at all
-            ///get financial data here
-            googleFinance.historical({symbols: symbols, from: '2016-12-02', to: '2017-01-04'}, function(err, data) {
+            ///get financial data here but this not efficient and would take a long time for many number
+            googleFinance.historical({symbols: symbols, from: '2016-10-02', to: '2017-01-04'}, function(err, data) {
 
                 for (var i=0; i<symbols.length; i++) {
                     var series = [];
@@ -49,11 +48,7 @@ function stockHandler () {
                         //convert date to milliseconds
                         var objDate = data[symbols[i]][j].date;
                         var milliseconds = objDate.getTime();
-
-                        series.push({
-                            0: milliseconds,
-                            1: data[symbols[i]][j].close
-                        });
+                        series.push([milliseconds,data[symbols[i]][j].close]);
                     }
                 res.locals.activeStocks.push({id: ids[i], ticker: symbols[i], user: users[i], series: series});
                 }
