@@ -11,64 +11,6 @@
     <div id="stockContainer">
 
       <div id="chart">
-          <script type="text/javascript">
-              ///decode to avoid XSS attacks
-              function htmlDecode(input){
-                  var e = document.createElement('div');
-                  e.innerHTML = input;
-                  return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-              }
-
-              var activeStocks = JSON.parse(htmlDecode("<%= JSON.stringify(activeStocks) %>"));
-
-              var chart = document.getElementById('chart');
-              var seriesOptions = [];
-              var seriesCounter = 0;
-              var names = ['MSFT', 'AAPL', 'GOOG'];
-
-              //convert to format for highcharts
-              for (var i=0; i <activeStocks.length; i++) {
-                  seriesOptions[i] = {
-                      name: activeStocks[i].ticker,
-                      data: activeStocks[i].series
-                  };
-              }
-
-              //seriesOptions = [{name: "MSFT",data: [[1278547200000,48],[1278747200000, 49]]}, {name: "GOOGLE",data: [[1278547200000,58],[1278747200000, 57]]} ]
-              console.log(seriesOptions);
-
-              Highcharts.stockChart(chart, {
-                  rangeSelector: {
-                      selected: 4
-                  },
-                  yAxis: {
-                      labels: {
-                          formatter: function () {
-                              return (this.value > 0 ? ' + ' : '') + this.value + '%';
-                          }
-                      },
-                      plotLines: [{
-                          value: 0,
-                          width: 2,
-                          color: 'silver'
-                      }]
-                  },
-                  plotOptions: {
-                      series: {
-                          compare: 'percent',
-                          showInNavigator: true
-                      }
-                  },
-                  tooltip: {
-                      pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-                      valueDecimals: 2,
-                      split: true
-                  },
-                  series: seriesOptions
-              });
-
-          </script>
-
       </div>
         <% if (activeStocks) { %>
           <% for (var i=0; i< activeStocks.length; i++) { %>
