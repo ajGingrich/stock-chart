@@ -1,5 +1,4 @@
 var socket = io.connect();
-var chart = $('#chart');
 
 ///connect to socket
 socket.on('connect', function () {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <% include partials/head.ejs %>
-  <body>
+  <div>
     <% include partials/nav.ejs %>
 
     <% if (message.length > 0) { %>
@@ -61,9 +61,7 @@
               },
               series: seriesOptions
           });"/>-->
-      </div>
-
-      </div>
+        </div>
         <% if (activeStocks) { %>
           <% for (var i=0; i< activeStocks.length; i++) { %>
             <div class="stockBox">
@@ -76,10 +74,8 @@
             </div>
           <% } %>
         <% } %>
-      </div>
-
-
-
+    </div>
+  </div>
 
      <% include partials/footer.ejs %>
   </body>
