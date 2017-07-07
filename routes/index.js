@@ -32,12 +32,14 @@ router.get('/profile', isLoggedIn, function(req, res) {
 
 //add a stock but get active stocks before and after login in case user isn't logged in
 router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
-    res.render('index', { activeStocks: res.locals.activeStocks });
+    //res.render('index', { activeStocks: res.locals.activeStocks });
+    res.redirect('/');
 });
 
 //remove a stock but get active stocks before and after login in case user isn't logged in
 router.post('/remove/:stockId', stockHandler.getStocks, isLoggedIn, stockHandler.removeStock, stockHandler.getStocks, function (req, res) {
-    res.render('index', { activeStocks: res.locals.activeStocks });
+    //res.render('index', { activeStocks: res.locals.activeStocks });
+    res.redirect('/');
 });
 
 //logout
@@ -76,7 +78,5 @@ module.exports = router;
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-
-    //res.render('index', { message: req.flash('You better sign up biatch') });
     res.render('index', { message: 'You need to be logged in' });
 }

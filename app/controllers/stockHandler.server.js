@@ -19,7 +19,7 @@ function stockHandler () {
             function(err, doc) {
                 if (err) throw err;
                 return next();
-            } );
+            });
     };
 
     this.getStocks = function(req, res, next) {
