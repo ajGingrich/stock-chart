@@ -1,4 +1,5 @@
 var socket = io.connect();
+var chart = $('#chart');
 
 ///connect to socket
 socket.on('connect', function () {
@@ -28,6 +29,12 @@ socket.on('newStockToClient', function() {
 socket.on('updated', function () {
     ///partially reload stock div
     $("#stockContainer").load(location.href+" #stockContainer>*","");
+    //run chart script again
+    var script = chart.getElementsByTagName('script');
+    for (var i=0; i<script.length; i++) {
+        eval(script[i].innerHTML);
+    }
+
 });
 
 

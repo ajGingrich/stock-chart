@@ -16,4 +16,14 @@
   <!--socket.io-->
   <script src='/socket.io/socket.io.js'></script>
 
+  <script>
+      function LoadMyJs(loadChart) {
+          var docHeadObj = document.getElementById('chart');
+          var dynamicScript = document.createElement("script");
+          dynamicScript.type = "text/javascript";
+          dynamicScript.src = scriptName;
+          docHeadObj.appendChild(dynamicScript);
+      }
+  </script>
+
 </head>
