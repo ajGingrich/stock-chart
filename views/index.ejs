@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <html>
   <% include partials/head.ejs %>
-  <div>
+
     <% include partials/nav.ejs %>
 
     <% if (message.length > 0) { %>
     <div class="alert alert-danger"><p><%= message %></p></div>
     <% } %>
 
-    <div id="stockContainer">
-
-      <div id="chart">
+  <div id="stockContainer">
+      <% if (activeStocks) { %>
+      <% for (var i=0; i< activeStocks.length; i++) { %>
+      <div class="stockBox">
+          <%- activeStocks[i].ticker %>
+          <div>
+              <form class="removeStock" action="/remove/<%- activeStocks[i].id %>" method="post">
+                  <button type="submit" class="btn btn-primary"><span>X</span></button>
+              </form>
+          </div>
       </div>
-
-        <% if (activeStocks) { %>
-          <% for (var i=0; i< activeStocks.length; i++) { %>
-            <div class="stockBox">
-                <%- activeStocks[i].ticker %>
-                <div>
-                  <form class="removeStock" action="/remove/<%- activeStocks[i].id %>" method="post">
-                    <button type="submit" class="btn btn-primary"><span>X</span></button>
-                  </form>
-                </div>
-            </div>
-          <% } %>
-        <% } %>
-    </div>
+      <% } %>
+      <% } %>
   </div>
+
 
      <% include partials/footer.ejs %>
   </body>

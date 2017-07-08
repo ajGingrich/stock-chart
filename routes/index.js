@@ -6,10 +6,10 @@ var stockHandler = new StockHandler();
 var io = require('../server');
 
 io.on('connection', function (socket) {
-    //console.log('Client Connected..');
+    console.log('Client Connected..');
 
     ///retrieve new stock from client
-    socket.on('changeToStock', function (data) {
+    socket.on('submitStockToServer', function (data) {
         ///send new stocks to all clients except socket that started it.
         socket.broadcast.emit('newStockToClient', data);
     });
