@@ -6,7 +6,7 @@ socket.on('connect', function () {
 });
 
 //use submit button to send the new stock to server
-$('#addStock').on('submit', function(e){
+$('.changeStock').on('submit', function(e){
     //var stockList = $('#stockList');
     socket.emit('submitStockToServer');
     console.log('submitted');
