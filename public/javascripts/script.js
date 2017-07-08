@@ -5,10 +5,17 @@ socket.on('connect', function () {
     console.log('connected');
 });
 
-//use submit button to send the new stock to server
-$('.changeStock').on('submit', function(e){
+///use submit button to send the new stock to server
+$('#addStock').on('submit', function(e){
     //var stockList = $('#stockList');
-    socket.emit('submitStockToServer');
+    socket.emit('changeToStock');
+    console.log('submitted');
+});
+
+///use remove button to delete a stock
+$('.removeStock').on('submit', function(e){
+    //var stockList = $('#stockList');
+    socket.emit('changeToStock');
     console.log('submitted');
 });
 
@@ -21,6 +28,7 @@ socket.on('newStockToClient', function() {
 socket.on('updated', function () {
     ///partially reload stock div
     $("#stockContainer").load(location.href+" #stockContainer>*","");
+    console.log
 });
 
 
