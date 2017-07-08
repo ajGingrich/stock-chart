@@ -18,14 +18,15 @@ $('.removeStock').on('submit', function(e){
 });
 
 //retrieve information on new stock and send back request to server
-socket.on('newStockToClient', function() {
+socket.on('newStockToClient', function(data) {
     socket.emit('updateMyStocks', 'Your stocks are now updated');
 });
 
 //check if its updated
-socket.on('updated', function () {
+socket.on('updated', function (data) {
     //reload only stock div
     $("#stockContainer").load(location.href+" #stockContainer>*","");
+    console.log(data);
 });
 
 

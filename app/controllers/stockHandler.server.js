@@ -52,7 +52,7 @@ function stockHandler () {
                     }
                 res.locals.activeStocks.push({id: ids[i], ticker: symbols[i], user: users[i], series: series});
                 }
-            return next();
+                return next();
             });
 
         });
