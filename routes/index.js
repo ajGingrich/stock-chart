@@ -9,9 +9,9 @@ io.on('connection', function (socket) {
     console.log('Client Connected..');
 
     ///retrieve new stock from client
-    socket.on('submitStockToServer', function (data) {
+    socket.on('changeToStock', function () {
         ///send new stocks to all clients except socket that started it.
-        socket.broadcast.emit('newStockToClient', data);
+        socket.broadcast.emit('newStockToClient');
     });
 
     socket.on('updateMyStocks', function (data) {

@@ -6,15 +6,13 @@ socket.on('connect', function () {
 });
 
 ///use submit button to send the new stock to server
-$('#addStock').on('submit', function(e){
-    //var stockList = $('#stockList');
+$('#addStock').on('submit', function(){
     socket.emit('changeToStock');
     console.log('submitted');
 });
 
 ///use remove button to delete a stock
-$('.removeStock').on('submit', function(e){
-    //var stockList = $('#stockList');
+$('.removeStock').on('submit', function(){
     socket.emit('changeToStock');
     console.log('submitted');
 });
@@ -25,10 +23,14 @@ socket.on('newStockToClient', function() {
 });
 
 //check if its updated
-socket.on('updated', function () {
+socket.on('updated', function (data) {
     ///partially reload stock div
-    $("#stockContainer").load(location.href+" #stockContainer>*","");
-    console.log
+    console.log(data);
+    setTimeout(function(){
+        $("#stockContainer").load(location.href +" #stockContainer>*","");
+    }, 3000);
+    //$("#stockContainer").load(location.href +" #stockContainer>*","");
+
 });
 
 

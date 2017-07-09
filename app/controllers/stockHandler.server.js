@@ -38,8 +38,8 @@ function stockHandler () {
                 users.push(docs[i].user);
             }
 
-            ///get financial data here but this not efficient and would take a long time for many number
-            googleFinance.historical({symbols: symbols, from: '2016-10-02', to: '2017-01-04'}, function(err, data) {
+            ///get financial data here but this not efficient and would take a long time for many numbers
+            googleFinance.historical({symbols: symbols, from: '2016-06-02', to: '2017-01-04'}, function(err, data) {
 
                 for (var i=0; i<symbols.length; i++) {
                     var series = [];
