@@ -6,7 +6,6 @@ var stockHandler = new StockHandler();
 var io = require('../server');
 
 io.on('connection', function (socket) {
-    console.log('Client Connected..');
 
     ///retrieve new stock from client
     socket.on('changeToStock', function () {
@@ -33,13 +32,11 @@ router.get('/profile', isLoggedIn, function(req, res) {
 //add a stock but get active stocks before and after login in case user isn't logged in
 router.post('/add', stockHandler.getStocks, isLoggedIn, stockHandler.addStock, stockHandler.getStocks, function (req, res) {
     res.render('index', { activeStocks: res.locals.activeStocks });
-    //res.redirect('/');
 });
 
 //remove a stock but get active stocks before and after login in case user isn't logged in
 router.post('/remove/:stockId', stockHandler.getStocks, isLoggedIn, stockHandler.removeStock, stockHandler.getStocks, function (req, res) {
     res.render('index', { activeStocks: res.locals.activeStocks });
-    //res.redirect('/');
 });
 
 //logout

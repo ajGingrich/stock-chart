@@ -1,4 +1,4 @@
-$backgroundColor: #721071;
+$backgroundColor: #e3f2e3;
 $partialColor: #a7b5ba;
 /********* Fonts **********/
 
@@ -45,8 +45,12 @@ div h4 {
   background-color: $partialColor;
 }
 
+#navSpan {
+  margin-left: 5px;
+}
+
 #addStock {
-  margin: 10px 0 0 10px;
+  margin: 15px 0 0 10px;
   float: left;
   display: inline;
 }
@@ -138,7 +142,7 @@ footer p:nth-child(3) {
 .stockBox {
   height: 75px;
   width: 75px;
-  background-color: orange;
+  background-color: #1ebc24;
   border-radius: 10px;
   opacity: .8;
   display: inline-block;

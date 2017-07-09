@@ -16,7 +16,7 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
-  background-color: #721071; }
+  background-color: #e3f2e3; }
 
 /****** Nav Styling ******/
 nav {
@@ -33,8 +33,11 @@ div h4 {
 .nav-container {
   background-color: #a7b5ba; }
 
+#navSpan {
+  margin-left: 5px; }
+
 #addStock {
-  margin: 10px 0 0 10px;
+  margin: 15px 0 0 10px;
   float: left;
   display: inline; }
 
@@ -73,7 +76,7 @@ nav {
   background-color: black; }
 
 .dropdown-menu {
-  background-color: #721071;
+  background-color: #e3f2e3;
   border-radius: 10px; }
 
 .dropdown-menu li {
@@ -111,7 +114,7 @@ footer p:nth-child(3) {
 .stockBox {
   height: 75px;
   width: 75px;
-  background-color: orange;
+  background-color: #1ebc24;
   border-radius: 10px;
   opacity: .8;
   display: inline-block;

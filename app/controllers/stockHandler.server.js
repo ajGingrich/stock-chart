@@ -37,9 +37,14 @@ function stockHandler () {
                 ids.push(docs[i]._id);
                 users.push(docs[i].user);
             }
+            var today = new Date;
+
+            var testDate = new Date;
+            var olderDate = testDate.setMonth(testDate.getMonth()- 8);
+            var oldDateObj = new Date(olderDate);
 
             ///get financial data here but this not efficient and would take a long time for many numbers
-            googleFinance.historical({symbols: symbols, from: '2016-06-02', to: '2017-01-04'}, function(err, data) {
+            googleFinance.historical({symbols: symbols, from: oldDateObj, to: today}, function(err, data) {
 
                 for (var i=0; i<symbols.length; i++) {
                     var series = [];
