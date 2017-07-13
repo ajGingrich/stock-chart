@@ -14,4 +14,4 @@ User Stories
 * I can remove stocks.
 * I can see changes in real-time when any other user adds or removes a stock. For this you will need to use Web Sockets.
 
-Check out the app at [https://dashboard.heroku.com/apps/stockchart320](https://dashboard.heroku.com/apps/stockchart320)
+Check out the app at [https://stockchart320.herokuapp.com/](https://stockchart320.herokuapp.com/)
